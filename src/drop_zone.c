@@ -10,11 +10,6 @@ static bool s_move_direction_is_up;
 
 
 static void anim_stopped_handler(Animation *animation, bool finished, void *context) {
-#if defined(PBL_SDK_2)
-  // Animations do not auto-destroy in SDK 2.x
-  property_animation_destroy((PropertyAnimation*)animation);
-#endif
-
   // Need to be static because it's used by the system later.
   static char s_time_text[] = "00:00";
 
@@ -65,7 +60,7 @@ static void main_window_load(Window *window) {
   text_layer_set_text_color(s_time_layer, GColorWhite);
   text_layer_set_background_color(s_time_layer, GColorClear);
   text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
-  text_layer_set_font(s_time_layer, 
+  text_layer_set_font(s_time_layer,
     fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_ROBOTO_BOLD_CONDENSED_SUBSET_40)));
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_time_layer));
 
